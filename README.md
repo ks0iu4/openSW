@@ -59,9 +59,59 @@
   | `x`(BSD) | 터미널에 종속되지 않은 프로세스 출력 |
   | `-x` | 로그인 상태에 있는 동안 아직 완료되지 않은 프로세서 출력 |
   
-+ `ps`
-![image](https://github.com/ks0iu4/openSW/assets/132364542/2f40980b-334a-42c8-a6a8-c20d94859973)
++ `ps -ef`
+![image](https://github.com/ks0iu4/openSW/assets/132364542/7465c40e-deb1-4687-9b80-a327a447ebbf)
   + `PID` : 프로세스의 식별번호
+  + `PPID` : 부모 프로세스 ID
+  + `C` : 짧은 시간 동안의 CPU 사용률
+  + `STIME` : 프로세스가 시작된 시간
   + `TTY` : 프로세스와 연결된 터미널
   + `TIME` : 총 CPU 사용 시간
   + `CMD` : 프로세스의 실행 명령행
+---
+## jobs
++ 작업의 상태를 표시해줌
++ 현재 쉘 세션에서 실행시킨 백그라운드 작업의 목록 출력
+
+| Option | Content |
+|:---:|:---:|
+| `-l` | 프로세스 그룹 ID를 state 필드 앞에 출력 |
+| `-n` | 프로세스 그룹 중에 대표 프로세스 ID를 출력 |
+| `-p` | 각 프로세스 ID에 대해 한 행씩 출력 |
+| `cmd` | 지정한 명령어를 실행 |
+
+![image](https://github.com/ks0iu4/openSW/assets/132364542/fe83673d-4bd7-451c-b350-deda3ce47d9c)
+
+| State | Content |
+|:---:|:---:|
+| `Running` | 작업이 계속 진행중임 |
+| `Done` | 작업이 완료되어 0을 반환 |
+| `Done(code)` | 작업이 종료되었으며 0이 아닌 코드를 반환 |
+| `Stopped` | 작업이 일시 중단 |
+| `Stopped(SIGTSTP)` | SIGTSTP 시그널이 작업을 일시 중단 |
+| `Stopped(SIGSTOP)` | SIGSTOP 시그널이 작업을 일시 중단 |
+| `Stopped(SIGTTIN)` | SIGTTIN 시그널이 작업을 일시 중단 |
+| `Stopped(SIGTTOU)` | SIGTTOU 시그널이 작업을 일시 중단 |
+
+---
+## kill
++ 프로세스를 지정하고 신호를 보내서 제어하는 명령어
++ 주로 프로세스를 종료하는 용도로 사용
+
+| Option | Content |
+|:---:|:---:|
+| `-9` | PID를 직접 지정하여 종료 |
+| `-l` | 신호로 사용할 수 있는 신호 이름들 출력 |
+
+| Number | Signal name | Signal | Content |
+|:---:|:---:|:---:|:---:|
+| 1 | `SIGHUP` | `HUP` | 특정 실행 중인 프로그램이 사용하는 설정 파일 변경 및 변화된 내용 적용 |
+| 2 | `SIGINT` | `INT` | 현재 작동중인 프로그램 동작 멈추기 |
+| 9 | `SIGKILL` | `KILL` | 프로그램 무조건 종료 |
+| 11 | `SIGSEGV` | `SEGV` | 잘못된 메모리 관리시 생기는 신호 |
+| 15 | `SIGTERM` | `TERM` | 실행중인 프로그램의 정상적인 종료방법 |
+| 18 | `SIGCONT` | `CONT` | 중지 되어 있는 프로그램 재실행 |
+| 19 | `SIGSTOP` | `STOP` | 프로그램 중지 |
+| 20 | `SIGTSTP` | `TSTP` | 터미널에서 중지되어 있는 신호 |
+
+---
